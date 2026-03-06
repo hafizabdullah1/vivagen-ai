@@ -7,7 +7,7 @@ export function Footer() {
         <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
           Built by{" "}
           <a
-            href="#"
+            href="https://visionx.pk"
             target="_blank"
             rel="noreferrer"
             className="font-medium underline underline-offset-4 hover:text-primary"
@@ -16,14 +16,6 @@ export function Footer() {
           </a>
           . Powered by Google Gemini AI.
         </p>
-        <div className="flex items-center gap-4">
-          <Link href="/terms" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            Terms
-          </Link>
-          <Link href="/privacy" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
-            Privacy
-          </Link>
-        </div>
       </div>
     </footer>
   );

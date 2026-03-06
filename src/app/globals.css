@@ -124,3 +124,22 @@
     @apply bg-background text-foreground;
   }
 }
+
+@media print {
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+  
+  .print\:hidden {
+    display: none !important;
+  }
+  
+  .print\:block {
+    display: block !important;
+  }
+  
+  #pdf-export-content {
+    display: block !important;
+  }
+}

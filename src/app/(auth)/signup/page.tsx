@@ -73,7 +73,7 @@ export default function SignupPage() {
               Didn&apos;t receive it? Check your spam folder or{" "}
               <button
                 onClick={() => { setEmailSent(false); setError(null); }}
-                className="text-primary hover:underline"
+                className="text-primary hover:underline cursor-pointer"
               >
                 try again
               </button>.
@@ -135,7 +135,7 @@ export default function SignupPage() {
               />
             </div>
           </CardContent>
-          <CardFooter className="flex flex-col gap-4">
+          <CardFooter className="flex flex-col gap-4 pt-4">
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Creating account..." : "Create Account"}
             </Button>

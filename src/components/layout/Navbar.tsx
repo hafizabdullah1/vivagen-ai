@@ -72,7 +72,7 @@ export function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden p-2 rounded-md hover:bg-muted transition-colors"
+          className="md:hidden p-2 rounded-md hover:bg-muted transition-colors cursor-pointer"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
         >

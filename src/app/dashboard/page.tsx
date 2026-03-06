@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { PlusCircle, History, User } from "lucide-react";
+import { PlusCircle, History, User, Crown } from "lucide-react";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -31,6 +31,9 @@ export default async function DashboardPage() {
     .eq("month", currentMonth)
     .single();
   const interviewsUsed = usage?.interviews_used ?? 0;
+
+  const ADMIN_EMAIL = "habdullah4510@gmail.com";
+  const isAdmin = user.email === ADMIN_EMAIL;
 
   // Fetch recent interviews
   const { data: recentInterviews } = await supabase
@@ -67,12 +70,22 @@ export default async function DashboardPage() {
             Welcome back, <span className="font-medium">{user.email}</span>
           </p>
         </div>
-        <Link href="/interview/new">
-          <Button>
-            <PlusCircle className="mr-2 h-4 w-4" />
-            New Interview
-          </Button>
-        </Link>
+        <div className="flex gap-3">
+          {isAdmin && (
+            <Link href="/admin">
+              <Button variant="outline" className="border-yellow-500/50 hover:bg-yellow-500/10 text-yellow-700">
+                <Crown className="mr-2 h-4 w-4" />
+                Admin Console
+              </Button>
+            </Link>
+          )}
+          <Link href="/interview/new">
+            <Button>
+              <PlusCircle className="mr-2 h-4 w-4" />
+              New Interview
+            </Button>
+          </Link>
+        </div>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-10">
@@ -90,10 +103,10 @@ export default async function DashboardPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Free Tier Usage</CardTitle>
-            <User className="h-4 w-4 text-muted-foreground" />
+            {isAdmin ? <Crown className="h-4 w-4 text-yellow-500" /> : <User className="h-4 w-4 text-muted-foreground" />}
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{interviewsUsed} / 10</div>
+            <div className="text-2xl font-bold">{isAdmin ? "Unlimited" : `${interviewsUsed} / 10`}</div>
             <p className="text-xs text-muted-foreground">Interviews this month</p>
           </CardContent>
         </Card>
