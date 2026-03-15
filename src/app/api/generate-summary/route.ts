@@ -80,7 +80,7 @@ export async function POST(req: Request) {
       
       Return output STRICTLY as a JSON object matching this schema (do NOT use markdown \`\`\`json block):
       {
-        "summary": "A 2-3 paragraph professional summary of their performance.",
+        "summary": "An ultra-concise 2-3 sentence executive summary of their technical performance.",
         "strengths": ["Strength 1", "Strength 2"],
         "weaknesses": ["Area for improvement 1", "Area for improvement 2"],
         "recommendation": "Must be exactly one of: 'Strong Hire', 'Hire', 'Maybe', or 'Reject'"
@@ -101,16 +101,19 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "AI returned invalid format", raw: outputText }, { status: 500 });
     }
 
-    // Insert into DB
+    // Upsert into DB (handles race conditions if two requests come in at once)
     const { data: finalSummary, error: insertError } = await supabase
       .from("interview_summary")
-      .insert({
-        interview_id: interviewId,
-        summary: evaluation.summary,
-        strengths: evaluation.strengths || [],
-        weaknesses: evaluation.weaknesses || [],
-        recommendation: evaluation.recommendation,
-      })
+      .upsert(
+        {
+          interview_id: interviewId,
+          summary: evaluation.summary,
+          strengths: evaluation.strengths || [],
+          weaknesses: evaluation.weaknesses || [],
+          recommendation: evaluation.recommendation,
+        },
+        { onConflict: "interview_id" }
+      )
       .select()
       .single();
 
