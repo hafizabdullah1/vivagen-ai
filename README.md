@@ -6,12 +6,6 @@ AI-assisted technical interview workspace — generate questions, score answers,
 
 [https://vivagen-ai.vercel.app](https://vivagen-ai.vercel.app)
 
-## Screenshots
-
-| New interview | Live scoring | AI summary |
-| --- | --- | --- |
-| ![New](docs/screenshots/new-interview.png) | ![Score](docs/screenshots/scoring.png) | ![Summary](docs/screenshots/summary.png) |
-
 ## Key features
 
 - Supabase auth (signup/login) with RLS on interview data
