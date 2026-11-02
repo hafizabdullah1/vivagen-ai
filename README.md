@@ -96,7 +96,7 @@ npm run lint
 
 - [ ] Stripe billing / plan limits from `saas_launch_plan.md`
 - [ ] Team seats and shared scorecards
-- [ ] Add `.env.example`, tests, CI, MIT license
+- [ ] Add tests, CI, MIT license
 - [ ] Social preview image and richer README on GitHub
 
 ## Author
